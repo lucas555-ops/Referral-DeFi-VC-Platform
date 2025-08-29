@@ -20,25 +20,50 @@
       --accent3:#8a7dff;
       --danger:#ff5c80;
       --gold:#f7c14b;
-      --glow: drop-shadow(0 0 18px rgba(22,255,154,.45)) drop-shadow(0 0 32px rgba(0,229,255,.25));
+      --glow: drop-shadow(0 0 12px rgba(22,255,154,.4)) drop-shadow(0 0 24px rgba(0,229,255,.2));
     }
     *{box-sizing:border-box}
-    html,body{height:100%;}
+    html,body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; 
+      background:
+        radial-gradient(900px 600px at 20% -10%, #0f2435 0%, #0b0f14 60%),
+        radial-gradient(700px 500px at 90% 20%, #13182b 0%, transparent 50%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+      position:relative;
+    }
+    body::before, body::after{
+      content:""; position:fixed; inset:-10%; z-index:-1; pointer-events:none; will-change:transform, opacity; opacity:.9;
+    }
+    /* Layer 1 (deep) */
+    body::before{
+      background:
+        radial-gradient(1100px 780px at 15% -15%, rgba(0,229,255,.12) 0%, transparent 60%),
+        radial-gradient(900px 640px at 85% 0%, rgba(22,255,154,.10) 0%, transparent 55%);
+      transform: translate3d(calc(var(--pX,0px)*.35), calc(var(--pY,0px)*.35 + var(--sY,0px)*-.12), 0);
+      filter: drop-shadow(0 0 24px rgba(0,229,255,.12));
+    }
+    /* Layer 2 (near) */
+    body::after{
+      background:
+        radial-gradient(800px 520px at 90% 25%, rgba(138,125,255,.10) 0%, transparent 55%),
+        radial-gradient(720px 480px at 25% 10%, rgba(0,229,255,.10) 0%, transparent 55%);
+      transform: translate3d(calc(var(--pX,0px)*.7), calc(var(--pY,0px)*.7 + var(--sY,0px)*-.22), 0);
+      filter: drop-shadow(0 0 28px rgba(22,255,154,.10));
+    }
     body{
       margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; 
       background:
-        radial-gradient(1200px 800px at 20% -10%, #0f2435 0%, #0b0f14 60%),
-        radial-gradient(1000px 700px at 120% 20%, #13182b 0%, transparent 50%),
+        radial-gradient(900px 600px at 20% -10%, #0f2435 0%, #0b0f14 60%),
+        radial-gradient(700px 500px at 90% 20%, #13182b 0%, transparent 50%),
         var(--bg);
       color:var(--text);
       overflow-x:hidden;
     }
     a{color:var(--accent1); text-decoration:none}
     .wrap{max-width:1200px; margin:0 auto; padding:0 20px}
-    header{
-      position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(8px);
-      background:linear-gradient(180deg, rgba(13,19,25,.85), rgba(13,19,25,.35)); border-bottom:1px solid rgba(255,255,255,.06);
-    }
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(8px); background:linear-gradient(180deg, rgba(13,19,25,.9), rgba(13,19,25,.45)); border-bottom:1px solid rgba(255,255,255,.06)}
     .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
     .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.4px}
     .logo{width:34px; height:34px; background:conic-gradient(from 0deg, var(--accent1), var(--accent2), var(--accent3), var(--accent1)); border-radius:10px; filter:var(--glow); position:relative}
@@ -54,24 +79,34 @@
     .btn:hover{transform:translateY(-1px)}
 
     /* Hero */
-    .hero{position:relative; padding:92px 0 64px;}
-    .hero h1{font-size:48px; line-height:1.08; margin:0 0 14px; text-shadow:0 4px 22px rgba(0,229,255,.15)}
+    .hero{padding:92px 0 64px}
+    .hero h1{font-size:48px; line-height:1.15; margin:0 0 14px; text-shadow:0 4px 16px rgba(0,229,255,.18)}
     .hero p.lead{font-size:18px; color:#c9d9ee; max-width:820px}
     .hero .cta{display:flex; gap:12px; margin-top:22px; flex-wrap:wrap}
     .hero .badges{display:flex; gap:14px; margin-top:22px; flex-wrap:wrap}
     .badge{padding:8px 12px; border-radius:999px; background:linear-gradient(180deg, rgba(22,255,154,.16), rgba(0,229,255,.12)); border:1px solid rgba(0,229,255,.25); color:#eafff6; font-weight:600; font-size:12px}
 
     /* Sections */
-    section{padding:84px 0; position:relative}
-    h2{font-size:32px; margin:0 0 12px}
-    .sub{color:var(--muted); margin:0 0 28px}
+    section{padding:72px 0; position:relative}
+    h2{font-size:30px; margin:0 0 12px}
+    .sub{color:var(--muted); margin:0 0 24px}
     .grid{display:grid; gap:18px}
 
     /* Cards */
     .card{background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:20px; position:relative; overflow:hidden}
-    .card:before{content:""; position:absolute; inset:0; background:radial-gradient(500px 140px at 10% -10%, rgba(0,229,255,.15), transparent 60%); opacity:.7; pointer-events:none}
+    .card:before{content:""; position:absolute; inset:0; background:radial-gradient(420px 140px at 50% -12%, rgba(0,229,255,.14), transparent 60%); opacity:.5; pointer-events:none}
     .card .title{font-weight:700; margin-bottom:8px}
-    .card p{color:#cfe2ff}
+    .card p{color:#cfe2ff; line-height:1.5}
+
+    /* Responsive typography */
+    @media (max-width:768px){
+      .hero h1{font-size:32px; line-height:1.2}
+      h2{font-size:24px}
+      .hero p.lead{font-size:16px}
+      .card{padding:16px}
+      .card p{font-size:14px}
+      .card .title{font-size:16px}
+    }
 
     /* Problem list */
     .list{display:grid; gap:10px; margin-top:14px}
@@ -79,11 +114,10 @@
     .li .dot{width:10px; height:10px; border-radius:999px; margin-top:8px; background:radial-gradient(circle at 30% 30%, var(--accent2), var(--accent1)); filter:var(--glow)}
 
     /* Flow */
-    .flow{display:grid; gap:14px; grid-template-columns:repeat(6, minmax(0,1fr));}
+    .flow{display:grid; gap:14px; grid-template-columns:repeat(6, minmax(0,1fr))}
     .step{position:relative; text-align:center; padding:16px; border-radius:14px; border:1px solid rgba(255,255,255,.06); background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02))}
     .step .num{font-weight:800; color:var(--accent2); font-size:12px}
     .step .nm{font-weight:700}
-    .arrow{height:2px; background:linear-gradient(90deg, rgba(0,229,255,.6), rgba(22,255,154,.6)); align-self:center}
 
     /* Tokenomics */
     .tokenomics{display:grid; grid-template-columns:1.4fr .6fr; gap:24px; align-items:center}
@@ -110,18 +144,29 @@
     /* Glow divider */
     .divider{height:1px; background:linear-gradient(90deg, rgba(0,229,255,.0), rgba(0,229,255,.65), rgba(22,255,154,.65), rgba(0,229,255,.0)); filter:blur(.3px); margin:38px 0}
 
-    /* Responsive */
+    /* Responsive grids */
     @media (max-width:1024px){
       .flow{grid-template-columns:repeat(3, minmax(0,1fr))}
-      .tokenomics{grid-template-columns:1fr;}
+      .tokenomics{grid-template-columns:1fr}
       .road{grid-template-columns:1fr 1fr}
       .compare{grid-template-columns:1fr}
+      #solution .grid{grid-template-columns:repeat(2, minmax(0,1fr))}
+      #market .grid{grid-template-columns:repeat(2, minmax(0,1fr))}
+      #risk .grid{grid-template-columns:repeat(2, minmax(0,1fr))}
+      #oversight .grid{grid-template-columns:1fr}
+      #docs .grid{grid-template-columns:1fr}
     }
     @media (max-width:640px){
-      .hero h1{font-size:36px}
       nav{display:none}
       .flow{grid-template-columns:1fr 1fr}
       .road{grid-template-columns:1fr}
+      #solution .grid, #market .grid, #risk .grid{grid-template-columns:1fr}
+      h2{font-size:26px}
+      .hero h1{font-size:30px}
+      .hero p.lead{font-size:16px; line-height:1.55}
+      .badge{font-size:11px; padding:6px 10px}
+      .rowx{flex-direction:column; align-items:flex-start}
+      .wrap{padding:0 16px}
     }
 
     /* REVEAL — безопасно по умолчанию */
@@ -129,28 +174,8 @@
     .animate .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease}
     .animate .reveal.show{opacity:1; transform:none}
 
-    /* Видимый фокус */
+    /* Focus */
     .btn:focus-visible{outline:2px solid var(--accent1); outline-offset:2px}
-
-    /* Чуть выше контраст субтекста */
-    .sub{color:#b8cbe0}
-
-    /* Уважение к reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .btn, .reveal{transition:none !important; transform:none !important}
-      .btn:hover{transform:none}
-    }
-
-    /* Utilities responsive */
-    @media (max-width:1024px){
-      #utilities .grid{grid-template-columns:repeat(3, minmax(0,1fr))}
-    }
-    @media (max-width:640px){
-      #utilities .grid{grid-template-columns:1fr 1fr}
-    }
-    @media (max-width:420px){
-      #utilities .grid{grid-template-columns:1fr}
-    }
 
     /* Docs hover */
     #docs .card{cursor:pointer}
@@ -159,344 +184,404 @@
     /* Skip link */
     .sr-only-focusable{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
     .sr-only-focusable:focus{left:16px; top:16px; width:auto; height:auto; padding:8px 12px; background:#111a; border-radius:8px; outline:2px solid var(--accent1)}
+
+    /* FX hover cards (neon tilt & glow) */
+    .fx-card{
+      --rx: 0deg; --ry: 0deg; --mx:50%; --my:50%;
+      transform-style: preserve-3d;
+      transform: perspective(800px) rotateX(var(--rx)) rotateY(var(--ry));
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .fx-card::after{
+      content:""; position:absolute; inset:-1px;
+      background: radial-gradient(180px 120px at var(--mx) var(--my), rgba(0,229,255,.18), rgba(22,255,154,.12) 35%, transparent 60%);
+      mix-blend-mode:screen; pointer-events:none; opacity:.9;
+    }
+    .fx-card:hover{box-shadow:0 12px 28px rgba(0,229,255,.12), 0 6px 14px rgba(22,255,154,.10); border-color:rgba(0,229,255,.28)}
+    @media (prefers-reduced-motion: reduce){
+      .btn, .reveal{transition:none !important; transform:none !important}
+      .btn:hover{transform:none}
+      body::before, body::after{transform:none !important; opacity:.7}
+    }
+      .fx-card::after{display:none}
+    }
   </style>
 </head>
 <body>
-<header>
-  <div class="wrap nav">
-    <div class="brand">
-      <div class="logo" aria-hidden="true"></div>
-      <span>Referral DeFi VC Platform</span>
+  <a href="#main-content" class="sr-only-focusable">Пропустить к контенту</a>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Referral DeFi VC Platform</span>
+      </div>
+      <nav aria-label="Главная навигация">
+        <a href="#solution">Решение</a>
+        <a href="#flow">Архитектура</a>
+        <a href="#tokenomics">Токеномика</a>
+        <a href="#docs">Документы</a>
+        <a href="#cta" class="btn primary"><span class="shine"></span>Присоединиться</a>
+      </nav>
     </div>
-    <nav aria-label="Главная навигация">
-      <a href="#solution">Решение</a>
-      <a href="#flow">Архитектура</a>
-      <a href="#tokenomics">Токеномика</a>
-      <a href="#docs">Документы</a>
-      <a href="#cta" class="btn primary"><span class="shine"></span>Присоединиться</a>
-    </nav>
-  </div>
-</header>
+  </header>
 
-<a href="#main-content" class="sr-only-focusable">Пропустить к контенту</a>
-
-<main id="main-content" role="main">
-
-<section class="hero">
-  <div class="wrap">
-    <h1 class="reveal">Децентрализованный венчурный капитал с реферальным двигателем</h1>
-    <p class="lead reveal">Вход от $100 → доступ к VC. Сделки от сообщества. DAO + профессиональный надзор. Комбинация DeFi Vault (ERC‑4626), 5‑уровневой реферальной сети и голосования через NFT‑pass.</p>
-    <div class="cta reveal">
-      <a href="https://t.me/your_bot" class="btn primary"><span class="shine"></span>Присоединиться к вайтлисту</a>
-      <a href="#docs" class="btn"><span class="shine"></span>Документы</a>
-      <a href="#flow" class="btn"><span class="shine"></span>Как это работает</a>
-    </div>
-    <div class="badges reveal">
-      <div class="badge">$100 entry</div>
-      <div class="badge">Community Dealflow</div>
-      <div class="badge">DAO + Pro Oversight</div>
-      <div class="badge">Gamified Growth</div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section id="problem">
-  <div class="wrap">
-    <h2 class="reveal">Проблема</h2>
-    <p class="sub reveal">Традиционный VC — закрытый клуб для избранных.</p>
-    <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px">
-      <div class="card reveal">
-        <div class="title">Барьеры входа</div>
-        <div class="list">
-          <div class="li"><div class="dot"></div><div>Порог входа $1M+ и закрытые аллокации</div></div>
-          <div class="li"><div class="dot"></div><div>Доступ только для инсайдеров</div></div>
+  <main id="main-content" role="main">
+    <section class="hero">
+      <div class="wrap">
+        <h1 class="reveal">Децентрализованный венчурный капитал с реферальным двигателем</h1>
+        <p class="lead reveal">Вход от $100 → доступ к VC. Сделки от сообщества. DAO + профессиональный надзор. Комбинация DeFi Vault (ERC‑4626), 5‑уровневой реферальной сети и голосования через NFT‑pass.</p>
+        <div class="cta reveal">
+          <a href="https://t.me/your_bot" class="btn primary"><span class="shine"></span>Присоединиться к вайтлисту</a>
+          <a href="#docs" class="btn"><span class="shine"></span>Документы</a>
+          <a href="#flow" class="btn"><span class="shine"></span>Как это работает</a>
+        </div>
+        <div class="badges reveal">
+          <div class="badge">$100 entry</div>
+          <div class="badge">Community Dealflow</div>
+          <div class="badge">DAO + Pro Oversight</div>
+          <div class="badge">Gamified Growth</div>
         </div>
       </div>
-      <div class="card reveal">
-        <div class="title">Непрозрачность и риск</div>
-        <div class="list">
-          <div class="li"><div class="dot"></div><div>Нет прозрачных процедур due diligence</div></div>
-          <div class="li"><div class="dot"></div><div>Retail‑инвесторы без диверсификации и экспертизы</div></div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="problem">
+      <div class="wrap">
+        <h2 class="reveal">Проблема</h2>
+        <p class="sub reveal">Традиционный VC — закрытый клуб для избранных.</p>
+        <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px">
+          <div class="card reveal">
+            <div class="title">Барьеры входа</div>
+            <div class="list">
+              <div class="li"><div class="dot"></div><div>Порог входа $1M+ и закрытые аллокации</div></div>
+              <div class="li"><div class="dot"></div><div>Доступ только для инсайдеров</div></div>
+            </div>
+          </div>
+          <div class="card reveal">
+            <div class="title">Непрозрачность и риск</div>
+            <div class="list">
+              <div class="li"><div class="dot"></div><div>Нет прозрачных процедур due diligence</div></div>
+              <div class="li"><div class="dot"></div><div>Retail‑инвесторы без диверсификации и экспертизы</div></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="solution">
-  <div class="wrap">
-    <h2 class="reveal">Решение: Referral‑to‑VC Hybrid</h2>
-    <p class="sub reveal">DeFi Vault + 5 уровней рефералок как движок dealflow + DAO голосование через NFT‑pass + геймификация</p>
-    <div class="grid" style="grid-template-columns:repeat(4,minmax(0,1fr))">
-      <div class="card reveal">
-        <div class="title">DeFi Vault (ERC‑4626)</div>
-        <p>Коллективные инвестиции с прозрачным учётом долей и возвратов.</p>
+    <section id="solution">
+      <div class="wrap">
+        <h2 class="reveal">Решение: Referral‑to‑VC Hybrid</h2>
+        <p class="sub reveal">DeFi Vault + 5 уровней рефералок как движок dealflow + DAO голосование через NFT‑pass + геймификация</p>
+        <div class="grid" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+          <div class="card reveal">
+            <div class="title">DeFi Vault (ERC‑4626)</div>
+            <p>Коллективные инвестиции с прозрачным учётом долей и возвратов.</p>
+          </div>
+          <div class="card reveal">
+            <div class="title">Referral Deal Sourcing</div>
+            <p>5‑уровневая сеть как источник сделок и органического роста.</p>
+          </div>
+          <div class="card reveal">
+            <div class="title">DAO + NFT‑pass</div>
+            <p>NFT‑доступ к голосованию и расширенным уровням сети.</p>
+          </div>
+          <div class="card reveal">
+            <div class="title">Gamification</div>
+            <p>Ежедневные лидерборды, streak‑бонусы, джекпоты.</p>
+          </div>
+        </div>
       </div>
-      <div class="card reveal">
-        <div class="title">Referral Deal Sourcing</div>
-        <p>5‑уровневая сеть как источник сделок и органического роста.</p>
+    </section>
+
+    <section id="flow">
+      <div class="wrap">
+        <h2 class="reveal">Архитектура продукта</h2>
+        <p class="sub reveal">От депозита до распределения доходов</p>
+        <div class="flow reveal">
+          <div class="step"><div class="num">1</div><div class="nm">Депозит ($100)</div></div>
+          <div class="step"><div class="num">2</div><div class="nm">Распределение (рефка+фонды)</div></div>
+          <div class="step"><div class="num">3</div><div class="nm">Vault</div></div>
+          <div class="step"><div class="num">4</div><div class="nm">DAO Vote</div></div>
+          <div class="step"><div class="num">5</div><div class="nm">Инвестиции</div></div>
+          <div class="step"><div class="num">6</div><div class="nm">Доходы</div></div>
+        </div>
       </div>
-      <div class="card reveal">
-        <div class="title">DAO + NFT‑pass</div>
-        <p>NFT‑доступ к голосованию и расширенным уровням сети.</p>
+    </section>
+
+    <section id="market">
+      <div class="wrap">
+        <h2 class="reveal">Рынок и возможности</h2>
+        <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+          <div class="card reveal">
+            <div class="title">VC рынок</div>
+            <p>$250B+ в год. Взрывной интерес к ранним стадиям.</p>
+          </div>
+          <div class="card reveal">
+            <div class="title">Аудитория</div>
+            <p>8–10M retail‑crypto инвесторов — недоохваченный сегмент.</p>
+          </div>
+          <div class="card reveal">
+            <div class="title">Рост Web3/AI</div>
+            <p>Сегменты с максимальным темпом роста и ликвидности.</p>
+          </div>
+        </div>
       </div>
-      <div class="card reveal">
-        <div class="title">Gamification</div>
-        <p>Ежедневные лидерборды, streak‑бонусы, джекпоты.</p>
+    </section>
+
+    <section id="tokenomics">
+      <div class="wrap">
+        <h2 class="reveal">Токеномика и распределение</h2>
+        <div class="tokenomics">
+          <div class="card reveal">
+            <svg viewBox="0 0 240 240" width="100%" height="240" role="img" aria-labelledby="donutTitle donutDesc">
+              <title id="donutTitle">Распределение $100 входа</title>
+              <desc id="donutDesc">50% реферальная сеть, 30% фонд накопления, 10% маркетинг, 5% резерв, 5% команда</desc>
+              <circle cx="120" cy="120" r="86" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="28" />
+              <circle cx="120" cy="120" r="86" fill="none" stroke="var(--accent2)" stroke-width="28" stroke-dasharray="270 540" stroke-dashoffset="0" />
+              <circle cx="120" cy="120" r="86" fill="none" stroke="var(--accent1)" stroke-width="28" stroke-dasharray="162 540" stroke-dashoffset="-270" />
+              <circle cx="120" cy="120" r="86" fill="none" stroke="#f08dff" stroke-width="28" stroke-dasharray="54 540" stroke-dashoffset="-432" />
+              <circle cx="120" cy="120" r="86" fill="none" stroke="#ffb56b" stroke-width="28" stroke-dasharray="27 540" stroke-dashoffset="-486" />
+              <circle cx="120" cy="120" r="86" fill="none" stroke="#9bb8ff" stroke-width="28" stroke-dasharray="27 540" stroke-dashoffset="-513" />
+              <circle cx="120" cy="120" r="62" fill="#0b0f14" />
+              <text x="120" y="124" fill="#cfe7ff" font-size="14" text-anchor="middle">$100 вход</text>
+            </svg>
+          </div>
+          <div class="legend reveal">
+            <div class="row"><span class="sw" style="background:var(--accent2)"></span><div><b>50%</b> — Реферальная сеть (25/10/7/5/3)</div></div>
+            <div class="row"><span class="sw" style="background:var(--accent1)"></span><div><b>30%</b> — Фонд накопления (Top‑3 + Jackpot)</div></div>
+            <div class="row"><span class="sw" style="background:#f08dff"></span><div><b>10%</b> — Маркетинг DAO</div></div>
+            <div class="row"><span class="sw" style="background:#ffb56b"></span><div><b>5%</b> — Резерв (buyback & burn)</div></div>
+            <div class="row"><span class="sw" style="background:#9bb8ff"></span><div><b>5%</b> — Команда (vesting)</div></div>
+            <div class="divider"></div>
+            <small>Доходы от стартапов: 70% Инвесторам · 15% Scouts · 10% Validators · 5% Treasury</small>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="flow">
-  <div class="wrap">
-    <h2 class="reveal">Архитектура продукта</h2>
-    <p class="sub reveal">От депозита до распределения доходов</p>
-    <div class="flow reveal">
-      <div class="step"><div class="num">1</div><div class="nm">Депозит ($100)</div></div>
-      <div class="arrow"></div>
-      <div class="step"><div class="num">2</div><div class="nm">Распределение (рефка+фонды)</div></div>
-      <div class="arrow"></div>
-      <div class="step"><div class="num">3</div><div class="nm">Vault</div></div>
-      <div class="arrow"></div>
-      <div class="step"><div class="num">4</div><div class="nm">DAO Vote</div></div>
-      <div class="arrow"></div>
-      <div class="step"><div class="num">5</div><div class="nm">Инвестиции</div></div>
-      <div class="arrow"></div>
-      <div class="step"><div class="num">6</div><div class="nm">Доходы</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="market">
-  <div class="wrap">
-    <h2 class="reveal">Рынок и возможности</h2>
-    <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-      <div class="card reveal">
-        <div class="title">VC рынок</div>
-        <p>$250B+ в год. Взрывной интерес к ранним стадиям.</p>
+    <section id="utilities">
+      <div class="wrap">
+        <h2 class="reveal">Утилити</h2>
+        <div class="grid" style="grid-template-columns:repeat(5,minmax(0,1fr))">
+          <div class="card reveal"><div class="title">DeFi Vault</div><p>VC‑доступ с $100</p></div>
+          <div class="card reveal"><div class="title">NFT‑pass</div><p>Голос и доступ к глубине сети</p></div>
+          <div class="card reveal"><div class="title">Лидерборды</div><p>Ежедневные награды</p></div>
+          <div class="card reveal"><div class="title">DAO‑маркетинг</div><p>Комьюнити управляет бюджетом</p></div>
+          <div class="card reveal"><div class="title">Gamification</div><p>Streak‑бонусы, бейджи, джекпоты</p></div>
+        </div>
       </div>
-      <div class="card reveal">
-        <div class="title">Аудитория</div>
-        <p>8–10M retail‑crypto инвесторов — недоохваченный сегмент.</p>
+    </section>
+
+    <section id="oversight">
+      <div class="wrap">
+        <h2 class="reveal">Профессиональный надзор</h2>
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+          <div class="card reveal"><div class="title">Advisory Board</div><p>Эксперты VC/крипты — стратегия, проверки.</p></div>
+          <div class="card reveal"><div class="title">Investment Committee</div><p>Финальное due diligence и staged‑инвестиции.</p></div>
+        </div>
+        <p class="sub reveal">DAO фильтрует идеи → эксперты фильтруют риски. Критерии: MVP, команда, traction, рынок $1B+.</p>
       </div>
-      <div class="card reveal">
-        <div class="title">Рост Web3/AI</div>
-        <p>Сегменты с максимальным темпом роста и ликвидности.</p>
+    </section>
+
+    <section id="risk">
+      <div class="wrap">
+        <h2 class="reveal">Управление рисками</h2>
+        <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+          <div class="card reveal"><div class="title">Staged инвестиции</div><p>Транши по прогрессу, а не весь чек сразу.</p></div>
+          <div class="card reveal"><div class="title">DD Scoring</div><p>Технология, команда, рынок, финансы, юрисдикция.</p></div>
+          <div class="card reveal"><div class="title">Диверсификация</div><p>≤10% в один стартап, ≤40% в один сектор.</p></div>
+        </div>
+        <p class="sub reveal">Community veto power через DAO. Резервный фонд для страховки критических рисков.</p>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="tokenomics">
-  <div class="wrap">
-    <h2 class="reveal">Токеномика и распределение</h2>
-    <div class="tokenomics">
-      <div class="card reveal">
-        <svg viewBox="0 0 240 240" width="100%" height="240" role="img" aria-labelledby="donutTitle donutDesc">
-          <title id="donutTitle">Распределение $100 входа</title>
-          <desc id="donutDesc">50% реферальная сеть, 30% фонд накопления, 10% маркетинг, 5% резерв, 5% команда</desc>
-          <circle cx="120" cy="120" r="86" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="28" />
-          <circle cx="120" cy="120" r="86" fill="none" stroke="var(--accent2)" stroke-width="28" stroke-dasharray="270 540" stroke-dashoffset="0" />
-          <circle cx="120" cy="120" r="86" fill="none" stroke="var(--accent1)" stroke-width="28" stroke-dasharray="162 540" stroke-dashoffset="-270" />
-          <circle cx="120" cy="120" r="86" fill="none" stroke="#f08dff" stroke-width="28" stroke-dasharray="54 540" stroke-dashoffset="-432" />
-          <circle cx="120" cy="120" r="86" fill="none" stroke="#ffb56b" stroke-width="28" stroke-dasharray="27 540" stroke-dashoffset="-486" />
-          <circle cx="120" cy="120" r="86" fill="none" stroke="#9bb8ff" stroke-width="28" stroke-dasharray="27 540" stroke-dashoffset="-513" />
-          <circle cx="120" cy="120" r="62" fill="#0b0f14" />
-          <text x="120" y="124" fill="#cfe7ff" font-size="14" text-anchor="middle">$100 вход</text>
-        </svg>
+    <section id="legal">
+      <div class="wrap">
+        <h2 class="reveal">Юридическая структура</h2>
+        <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="card reveal"><div class="title">Protocol, not Fund</div><p>DAO‑платформа, а не инвестиционный фонд.</p></div>
+          <div class="card reveal"><div class="title">Юрисдикция</div><p>BVI / Cayman / Abu Dhabi · Гео‑ограничения (без US retail).</p></div>
+          <div class="card reveal"><div class="title">Участие</div><p>Utility‑модель, нет гарантий дохода.</p></div>
+          <div class="card reveal"><div class="title">Compliance</div><p>Reg. reviews: SEC / MiCA / EU. Time‑locked upgrades, multi‑sig.</p></div>
+        </div>
       </div>
-      <div class="legend reveal">
-        <div class="row"><span class="sw" style="background:var(--accent2)"></span><div><b>50%</b> — Реферальная сеть (25/10/7/5/3)</div></div>
-        <div class="row"><span class="sw" style="background:var(--accent1)"></span><div><b>30%</b> — Фонд накопления (Top‑3 + Jackpot)</div></div>
-        <div class="row"><span class="sw" style="background:#f08dff"></span><div><b>10%</b> — Маркетинг DAO</div></div>
-        <div class="row"><span class="sw" style="background:#ffb56b"></span><div><b>5%</b> — Резерв (buyback & burn)</div></div>
-        <div class="row"><span class="sw" style="background:#9bb8ff"></span><div><b>5%</b> — Команда (vesting)</div></div>
-        <div class="divider"></div>
-        <small>Доходы от стартапов: 70% Инвесторам · 15% Scouts · 10% Validators · 5% Treasury</small>
+    </section>
+
+    <section id="traction">
+      <div class="wrap">
+        <h2 class="reveal">Traction / Validation</h2>
+        <div class="grid" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+          <div class="card reveal"><div class="title">Pilot Program</div><p>Первые участники и тестовый пул.</p></div>
+          <div class="card reveal"><div class="title">Advisory Board</div><p>Имена/логотипы партнёров.</p></div>
+          <div class="card reveal"><div class="title">Letters of Intent</div><p>От проектов и инвесторов.</p></div>
+          <div class="card reveal"><div class="title">Demo Day</div><p>Первый batch стартапов.</p></div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="utilities">
-  <div class="wrap">
-    <h2 class="reveal">Утилити</h2>
-    <div class="grid" style="grid-template-columns:repeat(5,minmax(0,1fr))">
-      <div class="card reveal"><div class="title">DeFi Vault</div><p>VC‑доступ с $100</p></div>
-      <div class="card reveal"><div class="title">NFT‑pass</div><p>Голос и доступ к глубине сети</p></div>
-      <div class="card reveal"><div class="title">Лидерборды</div><p>Ежедневные награды</p></div>
-      <div class="card reveal"><div class="title">DAO‑маркетинг</div><p>Комьюнити управляет бюджетом</p></div>
-      <div class="card reveal"><div class="title">Gamification</div><p>Streak‑бонусы, бейджи, джекпоты</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="oversight">
-  <div class="wrap">
-    <h2 class="reveal">Профессиональный надзор</h2>
-    <div class="grid" style="grid-template-columns:1fr 1fr">
-      <div class="card reveal"><div class="title">Advisory Board</div><p>Эксперты VC/крипты — стратегия, проверки.</p></div>
-      <div class="card reveal"><div class="title">Investment Committee</div><p>Финальное due diligence и staged‑инвестиции.</p></div>
-    </div>
-    <p class="sub reveal">DAO фильтрует идеи → эксперты фильтруют риски. Критерии: MVP, команда, traction, рынок $1B+.</p>
-  </div>
-</section>
-
-<section id="risk">
-  <div class="wrap">
-    <h2 class="reveal">Управление рисками</h2>
-    <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-      <div class="card reveal"><div class="title">Staged инвестиции</div><p>Транши по прогрессу, а не весь чек сразу.</p></div>
-      <div class="card reveal"><div class="title">DD Scoring</div><p>Технология, команда, рынок, финансы, юрисдикция.</p></div>
-      <div class="card reveal"><div class="title">Диверсификация</div><p>≤10% в один стартап, ≤40% в один сектор.</p></div>
-    </div>
-    <p class="sub reveal">Community veto power через DAO. Резервный фонд для страховки критических рисков.</p>
-  </div>
-</section>
-
-<section id="legal">
-  <div class="wrap">
-    <h2 class="reveal">Юридическая структура</h2>
-    <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-      <div class="card reveal"><div class="title">Protocol, not Fund</div><p>DAO‑платформа, а не инвестиционный фонд.</p></div>
-      <div class="card reveal"><div class="title">Юрисдикция</div><p>BVI / Cayman / Abu Dhabi · Гео‑ограничения (без US retail).</p></div>
-      <div class="card reveal"><div class="title">Участие</div><p>Utility‑модель, нет гарантий дохода.</p></div>
-      <div class="card reveal"><div class="title">Compliance</div><p>Reg. reviews: SEC / MiCA / EU. Time‑locked upgrades, multi‑sig.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="traction">
-  <div class="wrap">
-    <h2 class="reveal">Traction / Validation</h2>
-    <div class="grid" style="grid-template-columns:repeat(4,minmax(0,1fr))">
-      <div class="card reveal"><div class="title">Pilot Program</div><p>Первые участники и тестовый пул.</p></div>
-      <div class="card reveal"><div class="title">Advisory Board</div><p>Имена/логотипы партнёров.</p></div>
-      <div class="card reveal"><div class="title">Letters of Intent</div><p>От проектов и инвесторов.</p></div>
-      <div class="card reveal"><div class="title">Demo Day</div><p>Первый batch стартапов.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="compare">
-  <div class="wrap">
-    <h2 class="reveal">Конкурентный ландшафт</h2>
-    <div class="compare reveal">
-      <div class="table">
-        <h4>vs Traditional VC</h4>
-        <div class="rowx"><span>Вход</span><span>❌ $1M+ → ✅ $100</span></div>
-        <div class="rowx"><span>Сеть</span><span>❌ Закрытая → ✅ Community sourcing</span></div>
-        <div class="rowx"><span>Решения</span><span>❌ Централизованные → ✅ DAO + Pro oversight</span></div>
+    <section id="compare">
+      <div class="wrap">
+        <h2 class="reveal">Конкурентный ландшафт</h2>
+        <div class="compare reveal">
+          <div class="table">
+            <h4>vs Traditional VC</h4>
+            <div class="rowx"><span>Вход</span><span>❌ $1M+ → ✅ $100</span></div>
+            <div class="rowx"><span>Сеть</span><span>❌ Закрытая → ✅ Community sourcing</span></div>
+            <div class="rowx"><span>Решения</span><span>❌ Централизованные → ✅ DAO + Pro oversight</span></div>
+          </div>
+          <div class="table">
+            <h4>vs DeFi Platforms</h4>
+            <div class="rowx"><span>Фокус</span><span>Уникально: VC, не yield‑farming</span></div>
+            <div class="rowx"><span>Проф. слой</span><span>Advisory Board + Investment Committee</span></div>
+            <div class="rowx"><span>Модель</span><span>Гибрид MLM + DAO + VC</span></div>
+          </div>
+        </div>
       </div>
-      <div class="table">
-        <h4>vs DeFi Platforms</h4>
-        <div class="rowx"><span>Фокус</span><span>Уникально: VC, не yield‑farming</span></div>
-        <div class="rowx"><span>Проф. слой</span><span>Advisory Board + Investment Committee</span></div>
-        <div class="rowx"><span>Модель</span><span>Гибрид MLM + DAO + VC</span></div>
+    </section>
+
+    <section id="roadmap">
+      <div class="wrap">
+        <h2 class="reveal">Roadmap</h2>
+        <div class="road reveal">
+          <div class="phase"><div class="tag">Phase 1</div><div class="title">MVP Vault + реферальный движок</div></div>
+          <div class="phase"><div class="tag">Phase 2</div><div class="title">NFT‑pass + DAO governance</div></div>
+          <div class="phase"><div class="tag">Phase 3</div><div class="title">Фонд накопления + джекпоты</div></div>
+          <div class="phase"><div class="tag">Phase 4</div><div class="title">Первые VC‑инвестиции</div></div>
+          <div class="phase"><div class="tag">Phase 5</div><div class="title">Кросс‑чейн + институциональные партнёрства</div></div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="roadmap">
-  <div class="wrap">
-    <h2 class="reveal">Roadmap</h2>
-    <div class="road reveal">
-      <div class="phase"><div class="tag">Phase 1</div><div class="title">MVP Vault + реферальный движок</div></div>
-      <div class="phase"><div class="tag">Phase 2</div><div class="title">NFT‑pass + DAO governance</div></div>
-      <div class="phase"><div class="tag">Phase 3</div><div class="title">Фонд накопления + джекпоты</div></div>
-      <div class="phase"><div class="tag">Phase 4</div><div class="title">Первые VC‑инвестиции</div></div>
-      <div class="phase"><div class="tag">Phase 5</div><div class="title">Кросс‑чейн + институциональные партнёрства</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="financials">
-  <div class="wrap">
-    <h2 class="reveal">Финансовые прогнозы</h2>
-    <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-      <div class="card reveal"><div class="title">Year 1</div><p>$1M AUM · 10K участников</p></div>
-      <div class="card reveal"><div class="title">Year 3</div><p>$50M AUM · 100K участников</p></div>
-      <div class="card reveal"><div class="title">IRR target</div><p>25%+ по VC‑бенчмаркам · Доход платформы: 2% mgmt fee, 20% carry > 8% IRR, сервисы/подписки</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="docs">
-  <div class="wrap">
-    <h2 class="reveal">Документы</h2>
-    <div class="grid" style="grid-template-columns:1fr 1fr; gap:18px">
-      <a class="card reveal" href="docs/whitepaper.pdf" target="_blank" rel="noopener">
-        <div class="title">White Paper (PDF)</div>
-        <p>Полная версия WP v2.1. <i>Поместите файл в <code>/docs/whitepaper.pdf</code> репозитория GitHub Pages.</i></p>
-      </a>
-      <a class="card reveal" href="docs/pitchdeck.pdf" target="_blank" rel="noopener">
-        <div class="title">Pitch Deck (PDF)</div>
-        <p>Инвест‑презентация Deck v2.2. <i>Поместите файл в <code>/docs/pitchdeck.pdf</code>.</i></p>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section id="cta" style="padding-top:40px; padding-bottom:96px">
-  <div class="wrap">
-    <div class="card reveal" style="display:flex; align-items:center; justify-content:space-between; gap:18px">
-      <div>
-        <h2 style="margin:0 0 8px">Присоединяйся. Инвестируй в будущее.</h2>
-        <p class="sub" style="margin:0">Referral DeFi VC Platform → демократизация венчурных инвестиций.</p>
+    <section id="financials">
+      <div class="wrap">
+        <h2 class="reveal">Финансовые прогнозы</h2>
+        <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+          <div class="card reveal"><div class="title">Year 1</div><p>$1M AUM · 10K участников</p></div>
+          <div class="card reveal"><div class="title">Year 3</div><p>$50M AUM · 100K участников</p></div>
+          <div class="card reveal"><div class="title">IRR target</div><p>25%+ по VC‑бенчмаркам · Доход платформы: 2% mgmt fee, 20% carry > 8% IRR, сервисы/подписки</p></div>
+        </div>
       </div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap">
-        <a href="https://t.me/your_bot" class="btn primary"><span class="shine"></span>Вайтлист / TG‑бот</a>
-        <a href="mailto:team@refvc.xyz" class="btn"><span class="shine"></span>Связаться с командой</a>
+    </section>
+
+    <section id="docs">
+      <div class="wrap">
+        <h2 class="reveal">Документы</h2>
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:18px">
+          <a class="card reveal" href="docs/whitepaper.pdf" target="_blank" rel="noopener">
+            <div class="title">White Paper (PDF)</div>
+            <p>Полная версия WP v2.1. <i>Поместите файл в <code>/docs/whitepaper.pdf</code> репозитория GitHub Pages.</i></p>
+          </a>
+          <a class="card reveal" href="docs/pitchdeck.pdf" target="_blank" rel="noopener">
+            <div class="title">Pitch Deck (PDF)</div>
+            <p>Инвест‑презентация Deck v2.2. <i>Поместите файл в <code>/docs/pitchdeck.pdf</code>.</i></p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" style="padding-top:40px; padding-bottom:96px">
+      <div class="wrap">
+        <div class="card reveal" style="display:flex; align-items:center; justify-content:space-between; gap:18px">
+          <div>
+            <h2 style="margin:0 0 8px">Присоединяйся. Инвестируй в будущее.</h2>
+            <p class="sub" style="margin:0">Referral DeFi VC Platform → демократизация венчурных инвестиций.</p>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap">
+            <a href="https://t.me/your_bot" class="btn primary"><span class="shine"></span>Вайтлист / TG‑бот</a>
+            <a href="mailto:team@refvc.xyz" class="btn"><span class="shine"></span>Связаться с командой</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+      <div>© <span id="year"></span> Referral DeFi VC Platform · Все права защищены</div>
+      <div style="display:flex; gap:12px">
+        <a href="#docs">Документы</a>
+        <a href="https://github.com/your-org/ref-defi-vc" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://t.me/your_bot" target="_blank" rel="noopener">Telegram</a>
+        <a href="#legal">Legal</a>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-</main>
+  <script>
+    // Год в футере
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-<footer>
-  <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
-    <div>© <span id="year"></span> Referral DeFi VC Platform · Все права защищены</div>
-    <div style="display:flex; gap:12px">
-      <a href="#docs">Документы</a>
-      <a href="https://github.com/your-org/ref-defi-vc" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://t.me/your_bot" target="_blank" rel="noopener">Telegram</a>
-      <a href="#legal">Legal</a>
-    </div>
-  </div>
-</footer>
+    // Активация безопасных анимаций
+    document.body.classList.add('animate');
 
-<script>
-  // Year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Button shine mouse position
-  document.querySelectorAll('.btn').forEach(btn=>{
-    btn.addEventListener('pointermove', e=>{
-      const r = btn.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width * 100 + '%';
-      const shine = btn.querySelector('.shine');
-      shine && (shine.style.setProperty('--x', x));
+    // Shine позиция на кнопках
+    document.querySelectorAll('.btn').forEach(btn=>{
+      btn.addEventListener('pointermove', e=>{
+        const r = btn.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width * 100 + '%';
+        const shine = btn.querySelector('.shine');
+        shine && (shine.style.setProperty('--x', x));
+      });
     });
-  });
 
-  // Включаем анимации безопасно
-  document.body.classList.add('animate');
+    // Reveal on scroll с фоллбеком
+    const io = 'IntersectionObserver' in window 
+      ? new IntersectionObserver((entries)=>{
+          entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} });
+        },{threshold:.12})
+      : null;
+    document.querySelectorAll('.reveal').forEach(el=>{ if(io){ io.observe(el); } else { el.classList.add('show'); } });
 
-  // Reveal on scroll с фоллбеком
-  const io = 'IntersectionObserver' in window 
-    ? new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} });
-      },{threshold:.12})
-    : null;
-
-  document.querySelectorAll('.reveal').forEach(el=>{
-    if(io){ io.observe(el); } else { el.classList.add('show'); }
-  });
+    // FX cards: применяем на Solution, Utilities, Docs
+    (function(){
+      const sections = ['solution','utilities','docs'];
+      const fxCards = [];
+      sections.forEach(id=>{
+        const sec = document.getElementById(id);
+        if(!sec) return;
+        sec.querySelectorAll('.card').forEach(c=>{ c.classList.add('fx-card'); fxCards.push(c); });
+      });
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      fxCards.forEach(card=>{
+        card.addEventListener('pointermove', e=>{
+          const r = card.getBoundingClientRect();
+          const x = e.clientX - r.left, y = e.clientY - r.top;
+          const px = (x / r.width) * 100; const py = (y / r.height) * 100;
+          card.style.setProperty('--mx', px + '%');
+          card.style.setProperty('--my', py + '%');
+          const ry = ((x / r.width) - .5) * 10;
+          const rx = -((y / r.height) - .5) * 10;
+          card.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+          card.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+        });
+        card.addEventListener('pointerleave', ()=>{
+          card.style.setProperty('--mx','50%');
+          card.style.setProperty('--my','50%');
+          card.style.setProperty('--rx','0deg');
+          card.style.setProperty('--ry','0deg');
+        });
+      });
+    })();
+    // Parallax background (pointer + scroll)
+  (function(){
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+    let raf = null, px=0, py=0;
+    function tick(){
+      document.documentElement.style.setProperty('--pX', (px*10)+'px');
+      document.documentElement.style.setProperty('--pY', (py*10)+'px');
+      document.documentElement.style.setProperty('--sY', (window.scrollY*0.25)+'px');
+      raf = null;
+    }
+    addEventListener('pointermove', e=>{
+      px = (e.clientX / innerWidth) - .5;
+      py = (e.clientY / innerHeight) - .5;
+      if(!raf) raf = requestAnimationFrame(tick);
+    }, {passive:true});
+    addEventListener('scroll', ()=>{ if(!raf) raf = requestAnimationFrame(tick); }, {passive:true});
+    tick();
+  })();
 </script>
 </body>
 </html>
